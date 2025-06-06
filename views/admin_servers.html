@@ -1,0 +1,75 @@
+{% set title = "Admin - Server Management" %}
+{% set admin = true %}
+{% extends "new_base.html" %}
+
+{% block content %}
+<h2 class="page-subtitle">Server Management</h2>
+<p class="page-description">Add, edit, or remove servers from the monitoring system.</p>
+
+<div class="admin-panel">
+    <div class="action-bar">
+        <a href="/admin/servers/add" class="btn">Add New Server</a>
+    </div>
+    
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for server in servers %}
+            <tr>
+                <td>{{ server.name }}</td>
+                <td>
+                    {% if server.status == 1 %}
+                    Public
+                    {% elif server.status == 2 %}
+                    Admin Only
+                    {% else %}
+                    Disabled
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="/admin/servers/{{ server.sid }}" class="btn btn-secondary">Edit</a>
+                    <button onclick="deleteServer('{{ server.sid }}', '{{ server.name }}')" class="btn btn-error">Delete</button>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3">No servers found. Add a new server to get started.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+function deleteServer(sid, name) {
+    if (confirm(`Are you sure you want to delete the server '${name}'?`)) {
+        fetch(`/admin/servers/${sid}/del`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status) {
+                alert(data.data);
+                window.location.reload();
+            } else {
+                alert('Failed to delete server: ' + data.data);
+            }
+        })
+        .catch(error => {
+            alert('Error: ' + error.message);
+        });
+    }
+}
+</script>
+{% endblock %}

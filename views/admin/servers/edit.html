@@ -1,0 +1,163 @@
+{% set title = "Edit Server - " + server.name %}
+{% set admin = true %}
+{% extends "../../new_base.html" %}
+
+{% block content %}
+<h2 class="page-subtitle">Edit Server: {{ server.name }}</h2>
+<p class="page-description">Modify server configuration and monitoring settings.</p>
+
+<div class="form-container">
+    <form id="editServerForm" onsubmit="event.preventDefault(); editServer();">
+        <input type="hidden" id="sid" value="{{ server.sid }}">
+        <div class="form-group">
+            <label for="name" class="form-label">Server Name</label>
+            <input type="text" id="name" class="form-input" required value="{{ server.name }}" placeholder="Enter server name">
+        </div>
+
+        <div class="form-group">
+            <label for="status" class="form-label">Visibility Status</label>
+            <select id="status" class="form-select" required>
+                <option value="1" {% if server.status == 1 %}selected{% endif %}>Public (Visible to all)</option>
+                <option value="2" {% if server.status == 2 %}selected{% endif %}>Admin Only (Hidden from public)</option>
+                <option value="0" {% if server.status == 0 %}selected{% endif %}>Disabled (Not monitored)</option>
+            </select>
+        </div>
+
+        <h3>SSH Configuration</h3>
+        <div class="form-group">
+            <label for="ssh_host" class="form-label">Host/IP</label>
+            <input type="text" id="ssh_host" class="form-input" required value="{{ server.data.ssh.host }}" placeholder="e.g., 192.168.1.1">
+        </div>
+        <div class="form-group">
+            <label for="ssh_port" class="form-label">Port</label>
+            <input type="number" id="ssh_port" class="form-input" required value="{{ server.data.ssh.port }}" placeholder="e.g., 22">
+        </div>
+        <div class="form-group">
+            <label for="ssh_username" class="form-label">Username</label>
+            <input type="text" id="ssh_username" class="form-input" required value="{{ server.data.ssh.username }}" placeholder="e.g., root">
+        </div>
+        <div class="form-group">
+            <label for="ssh_password" class="form-label">Password</label>
+            <input type="password" id="ssh_password" class="form-input" value="{{ server.data.ssh.password }}" placeholder="Enter password (optional if using key)">
+        </div>
+        <div class="form-group">
+            <label for="ssh_privateKey" class="form-label">Private Key</label>
+            <input type="text" id="ssh_privateKey" class="form-input" value="{{ server.data.ssh.privateKey }}" placeholder="Path to private key (optional)">
+        </div>
+
+        <h3>API Configuration</h3>
+        <div class="form-group">
+            <label for="api_mode" class="form-label">API Mode (Passive/Active Sync)</label>
+            <label>
+                <input type="checkbox" id="api_mode" onchange="toggleApiPort()" {% if server.data.api.mode %}checked{% endif %}> Active Sync (Probe sends data to panel)
+            </label>
+        </div>
+        <div class="form-group" id="api_port_group" style="display: {% if server.data.api.mode %}none{% else %}block{% endif %};">
+            <label for="api_port" class="form-label">Passive Communication Port</label>
+            <input type="number" id="api_port" class="form-input" value="{{ server.data.api.port }}" placeholder="e.g., 8080">
+        </div>
+        <div class="form-group">
+            <label for="api_key" class="form-label">Communication Key</label>
+            <input type="text" id="api_key" class="form-input" required value="{{ server.data.api.key }}" placeholder="Enter a secure key">
+        </div>
+        <div class="form-group">
+            <label for="device" class="form-label">Specific Network Device (Optional)</label>
+            <input type="text" id="device" class="form-input" value="{{ server.data.device }}" placeholder="e.g., eth0 (default: all devices)">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn">Save Changes</button>
+            <a href="/admin/servers" class="btn btn-secondary">Cancel</a>
+            <button type="button" onclick="initServer()" class="btn">Install Probe</button>
+            <button type="button" onclick="updateServer()" class="btn">Update Probe</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+function toggleApiPort() {
+    const apiMode = document.getElementById('api_mode').checked;
+    document.getElementById('api_port_group').style.display = apiMode ? 'none' : 'block';
+}
+
+function editServer() {
+    const sid = document.getElementById('sid').value;
+    const formData = {
+        name: document.getElementById('name').value,
+        status: Number(document.getElementById('status').value),
+        top: {{ server.top }}, // Keep existing value
+        data: {
+            ssh: {
+                host: document.getElementById('ssh_host').value,
+                port: Number(document.getElementById('ssh_port').value),
+                username: document.getElementById('ssh_username').value,
+                password: document.getElementById('ssh_password').value,
+                privateKey: document.getElementById('ssh_privateKey').value
+            },
+            api: {
+                mode: document.getElementById('api_mode').checked,
+                key: document.getElementById('api_key').value,
+                port: Number(document.getElementById('api_port').value) || 8080
+            },
+            device: document.getElementById('device').value
+        }
+    };
+
+    fetch(`/admin/servers/${sid}/edit`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status) {
+            alert('Server updated successfully!');
+            window.location.href = '/admin/servers';
+        } else {
+            alert('Failed to update server: ' + data.data);
+        }
+    })
+    .catch(error => {
+        alert('Error: ' + error.message);
+    });
+}
+
+function initServer() {
+    const sid = document.getElementById('sid').value;
+    fetch(`/admin/servers/${sid}/init`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.data);
+    })
+    .catch(error => {
+        alert('Error: ' + error.message);
+    });
+}
+
+function updateServer() {
+    const sid = document.getElementById('sid').value;
+    fetch(`/admin/servers/${sid}/update`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.data);
+    })
+    .catch(error => {
+        alert('Error: ' + error.message);
+    });
+}
+</script>
+{% endblock %}

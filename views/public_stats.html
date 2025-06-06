@@ -1,0 +1,45 @@
+{% set title = "Server Status Monitor" %}
+{% extends "new_base.html" %}
+
+{% block content %}
+<h2 class="page-subtitle">Current Server Statuses</h2>
+<p class="page-description">Real-time monitoring of server performance metrics.</p>
+
+<div class="server-card-grid">
+    {% for sid, node in stats %}
+    <div class="server-card" id="card-{{ sid }}">
+        <h3 class="server-card-title">{{ node.name }}</h3>
+        <div class="server-stats">
+            <div class="stat-item">
+                <div class="stat-label">CPU Usage</div>
+                <div class="stat-value" id="{{ sid }}_CPU">--%</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="{{ sid }}_CPU_progress" style="width: 0%;"></div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Memory Usage</div>
+                <div class="stat-value" id="{{ sid }}_MEM">--%</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="{{ sid }}_MEM_progress" style="width: 0%;"></div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Network In</div>
+                <div class="stat-value" id="{{ sid }}_NET_IN">--</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Network Out</div>
+                <div class="stat-value" id="{{ sid }}_NET_OUT">--</div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p class="no-data-message">No public server data available at the moment.</p>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="/js/stats.js"></script>
+{% endblock %}

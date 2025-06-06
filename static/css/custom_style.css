@@ -1,0 +1,284 @@
+/* Custom styling for Server Monitor App with Material You design */
+
+:root {
+    --primary-color: #6750A4;
+    --primary-container: #D0BCFF;
+    --on-primary: #FFFFFF;
+    --secondary-color: #625B71;
+    --secondary-container: #E8DEF8;
+    --on-secondary: #FFFFFF;
+    --surface-color: #FFFBFE;
+    --on-surface: #1C1B1F;
+    --error-color: #B3261E;
+    --error-container: #F9DEDC;
+    --on-error: #FFFFFF;
+    --outline-color: #79747E;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    --border-radius-small: 8px;
+    --border-radius-medium: 12px;
+    --border-radius-large: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--surface-color);
+    color: var(--on-surface);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-header {
+    background-color: var(--primary-color);
+    color: var(--on-primary);
+    padding: 16px 0;
+    box-shadow: var(--shadow);
+    border-radius: 0 0 var(--border-radius-large) var(--border-radius-large);
+    margin-bottom: 24px;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-title {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.header-nav {
+    display: flex;
+    gap: 16px;
+}
+
+.nav-link {
+    color: var(--on-primary);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: var(--border-radius-small);
+    transition: background-color 0.2s ease;
+}
+
+.nav-link:hover {
+    background-color: var(--primary-container);
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto 24px;
+    padding: 0 24px;
+    flex: 1;
+}
+
+.app-footer {
+    background-color: var(--secondary-container);
+    color: var(--on-surface);
+    text-align: center;
+    padding: 16px 0;
+    border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+}
+
+/* Cards for server status */
+.server-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.server-card {
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.server-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.server-card-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--primary-color);
+}
+
+.server-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.stat-item {
+    background-color: var(--secondary-container);
+    padding: 12px;
+    border-radius: var(--border-radius-small);
+}
+
+.stat-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--secondary-color);
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.progress-bar-container {
+    height: 6px;
+    background-color: var(--outline-color);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+/* Buttons */
+.btn {
+    background-color: var(--primary-color);
+    color: var(--on-primary);
+    border: none;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    background-color: var(--primary-container);
+    box-shadow: var(--shadow);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-container);
+}
+
+.btn-error {
+    background-color: var(--error-color);
+}
+
+.btn-error:hover {
+    background-color: var(--error-container);
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--secondary-color);
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--outline-color);
+    border-radius: var(--border-radius-small);
+    font-size: 16px;
+    background-color: var(--surface-color);
+    color: var(--on-surface);
+    transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.form-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--outline-color);
+    border-radius: var(--border-radius-small);
+    font-size: 16px;
+    background-color: var(--surface-color);
+    color: var(--on-surface);
+}
+
+/* Admin Panel */
+.admin-panel {
+    margin-top: 24px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    background-color: var(--surface-color);
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius-medium);
+    overflow: hidden;
+}
+
+.admin-table th, .admin-table td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+.admin-table th {
+    background-color: var(--primary-container);
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.admin-table tr:not(:last-child) {
+    border-bottom: 1px solid var(--outline-color);
+}
+
+.admin-table tbody tr:hover {
+    background-color: var(--secondary-container);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .server-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .header-nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

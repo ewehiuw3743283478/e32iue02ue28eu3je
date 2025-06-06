@@ -1,0 +1,7 @@
+{
+  "name": "ServerMonitor",
+  "description": "A modern Material You styled server monitoring tool",
+  "repository": "https://github.com/yourusername/yourrepository",
+  "logo": "https://node-js-sample-1234567890ab.herokuapp.com/node.png",
+  "keywords": ["node", "express", "javascript", "static"]
+}

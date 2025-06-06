@@ -1,0 +1,114 @@
+/* Material You inspired styles */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+/* Base styles with Material You principles */
+.mdui-appbar {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    background-color: var(--md-sys-color-primary, #6750A4);
+    color: var(--md-sys-color-on-primary, #FFFFFF);
+    border-radius: 0 0 16px 16px;
+}
+
+.mdui-card, .mdui-btn-raised, .mdui-panel-item {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    background-color: var(--md-sys-color-surface, #FFFFFF);
+}
+
+.mdui-drawer {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.16);
+    background-color: var(--md-sys-color-surface, #FFFFFF);
+    border-radius: 16px 0 0 16px;
+}
+
+footer {
+    box-shadow: 0 -2px 8px 0 rgba(0, 0, 0, 0.16);
+    background-color: var(--md-sys-color-surface, #FFFFFF);
+    border-radius: 16px 16px 0 0;
+}
+
+/* Typography and color indicators */
+st { font-weight: 500; color: var(--md-sys-color-primary, #475bca); }
+at { font-weight: 500; color: var(--md-sys-color-secondary, #FF4081); }
+gt { font-weight: 500; color: var(--md-sys-color-tertiary, #00C853); }
+yt { font-weight: 500; color: var(--md-sys-color-warning, #ffbb00); }
+
+.mdui-theme-layout-dark st { color: var(--md-sys-color-primary-light, #9aa9ff); }
+.mdui-theme-layout-dark at { color: var(--md-sys-color-secondary-light, #f7a4b9); }
+
+/* Spacing and layout */
+.mt { margin-top: 16px; }
+.mt-s { margin-top: 8px; }
+.mdui-card ul.mdui-list { padding-left: 0; }
+.text { font-size: 18px; }
+.text_s { font-size: 16px; }
+
+/* Interactive elements */
+.mdui-switch { height: 20px; line-height: 20px; }
+.stop { background: var(--md-sys-color-error-container, #b6b6b6); }
+.stop td { color: var(--md-sys-color-on-error-container, #fff); font-weight: 500; }
+.ccp:hover, .poh:hover { cursor: pointer; }
+
+/* Surface effects */
+.mdui-drawer, footer {
+    backdrop-filter: blur(10px) brightness(105%);
+}
+.mdui-card {
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+}
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: var(--md-sys-color-primary, #6750A4);
+    color: var(--md-sys-color-on-primary, #FFFFFF);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover {
+    background-color: var(--md-sys-color-primary-container, #D0BCFF);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1023.9px) {
+    .mdui-drawer { background-color: var(--md-sys-color-surface, #fff); }
+    .mdui-overlay { backdrop-filter: blur(5px); }
+}
+
+/* Global styles */
+html {
+    font-family: 'Roboto', sans-serif;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23f6c5d3' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%237b8aca' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23ecc7e1' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%237491d0' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23d9c6eb' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%236792cc' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23c4caf3' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%236caae6' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23afd3f5' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%2374bef4' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%239ddcfa' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%2369c3f8' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+body {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: var(--md-sys-color-on-surface, #1C1B1F);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+/* Dynamic theming support (simplified for demo; ideally, use JS to extract colors or system preferences) */
+:root {
+    --md-sys-color-primary: #6750A4;
+    --md-sys-color-primary-container: #D0BCFF;
+    --md-sys-color-on-primary: #FFFFFF;
+    --md-sys-color-secondary: #625B71;
+    --md-sys-color-secondary-container: #E8DEF8;
+    --md-sys-color-on-secondary: #FFFFFF;
+    --md-sys-color-tertiary: #7D5260;
+    --md-sys-color-tertiary-container: #FFD8E4;
+    --md-sys-color-on-tertiary: #FFFFFF;
+    --md-sys-color-error: #B3261E;
+    --md-sys-color-error-container: #F9DEDC;
+    --md-sys-color-on-error: #FFFFFF;
+    --md-sys-color-surface: #FFFBFE;
+    --md-sys-color-on-surface: #1C1B1F;
+    --md-sys-color-warning: #FFB74D;
+    --md-sys-color-primary-light: #9aa9ff;
+    --md-sys-color-secondary-light: #f7a4b9;
+}

@@ -1,0 +1,76 @@
+{% set title = "Login - Server Monitor" %}
+{% extends "new_base.html" %}
+
+{% block content %}
+<h2 class="page-subtitle">Admin Login</h2>
+<p class="page-description">Access the server management panel.</p>
+
+<div class="login-form-container">
+    <form id="loginForm" onsubmit="event.preventDefault(); login();">
+        <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-input" required placeholder="Enter admin password">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn">Login</button>
+        </div>
+    </form>
+</div>
+
+<style>
+.login-form-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 24px;
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow);
+}
+
+.page-subtitle {
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+.page-description {
+    text-align: center;
+    margin-bottom: 24px;
+    color: var(--on-surface);
+    opacity: 0.8;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+</style>
+{% endblock %}
+
+{% block js %}
+<script>
+function login() {
+    const password = document.getElementById('password').value;
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status) {
+            window.location.href = '/admin/servers';
+        } else {
+            alert('Login failed: ' + data.data);
+        }
+    })
+    .catch(error => {
+        alert('Error: ' + error.message);
+    });
+}
+</script>
+{% endblock %}

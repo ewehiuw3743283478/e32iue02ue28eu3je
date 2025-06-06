@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/custom_style.css">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <h1 class="app-title">{{ title }}</h1>
+            <nav class="header-nav">
+                {% if admin %}
+                <a href="/admin/servers" class="nav-link">Admin Panel</a>
+                <a href="/logout" class="nav-link">Logout</a>
+                {% else %}
+                <a href="/login" class="nav-link">Login</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+    
+    <main class="app-container">
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    <footer class="app-footer">
+        <p>&copy; {{ current_year }} Server Monitor App. All rights reserved.</p>
+    </footer>
+    
+    <script src="/js/custom_core.js"></script>
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

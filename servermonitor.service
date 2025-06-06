@@ -1,0 +1,11 @@
+[Unit]
+Description=servermonitor
+
+[Service]
+Type=forking
+ExecStart=/root/servermonitor/run.sh
+ExecReload=/root/servermonitor/restart.sh
+ExecStop=/root/servermonitor/stop.sh
+
+[Install]
+WantedBy=multi-user.target
