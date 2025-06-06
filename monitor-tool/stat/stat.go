@@ -1,7 +1,7 @@
 package stat
 
 import (
-	"neko-status/walled"
+	"server-monitor/walled"
 	"time"
 
 	"github.com/gin-gonic/gin"

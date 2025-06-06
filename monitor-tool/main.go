@@ -7,8 +7,8 @@ import (
 	"log"
 	"strconv"
 
-	"neko-status/stat"
-	"neko-status/walled"
+	"server-monitor/stat"
+	"server-monitor/walled"
 
 	"github.com/gin-gonic/gin"
 	"gopkg.in/yaml.v2"
@@ -46,7 +46,7 @@ func main() {
 		// fmt.Println(Config)
 	}
 	if show_version {
-		fmt.Println("neko-status v1.0")
+		fmt.Println("server-monitor v1.0")
 		return
 	}
 	go walled.MonitorWalled()

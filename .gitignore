@@ -2,8 +2,8 @@ config.js
 database/db.db
 node_modules
 work.js
-neko-status/build
-modules/servers/neko-status
+server-monitor/build
+modules/servers/server-monitor
 tokens.json
 log/*.log
 package-lock.json

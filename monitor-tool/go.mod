@@ -1,4 +1,4 @@
-module neko-status
+module server-monitor
 
 go 1.18
 

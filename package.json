@@ -3,7 +3,7 @@
   "version": "1.0",
   "description": "A server monitoring application",
   "scripts": {
-    "start": "node servermonitor.js"
+    "start": "node src/servermonitor.js"
   },
   "keywords": [],
   "engines": {
@@ -27,6 +27,7 @@
     "npm": "^7.20.6",
     "nunjucks": "^3.2.3",
     "socket.io": "^4.1.3",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "pg": "^8.7.1"
   }
 }

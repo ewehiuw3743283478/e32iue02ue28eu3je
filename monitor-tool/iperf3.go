@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
-	"neko-status/iperf3"
+	"server-monitor/iperf3"
 	"strconv"
 
 	"github.com/gin-gonic/gin"

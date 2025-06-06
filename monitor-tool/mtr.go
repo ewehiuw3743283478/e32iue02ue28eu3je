@@ -1,7 +1,7 @@
 package main
 
 import (
-	"neko-status/mtr"
+	"server-monitor/mtr"
 	"net/http"
 	"strconv"
 
