@@ -2,7 +2,7 @@
 
 A modern web application for monitoring server statuses in real-time, featuring CPU, RAM, and network usage metrics. The app supports public viewing of selected servers and an admin panel for full management capabilities.
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ewehiuw3743283478/e32iue02ue28eu3je)
 
 ## Project Structure
 
