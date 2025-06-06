@@ -1,7 +1,10 @@
 {
-  "name": "ServerMonitor",
-  "description": "A modern Material You styled server monitoring tool",
-  "repository": "https://github.com/yourusername/yourrepository",
+  "name": "Server Monitor",
+  "description": "A modern server monitoring application.",
+  "repository": "https://github.com/ewehiuw3743283478/e32iue02ue28eu3je",
   "logo": "https://node-js-sample-1234567890ab.herokuapp.com/node.png",
-  "keywords": ["node", "express", "javascript", "static"]
+  "keywords": ["node", "express", "monitoring"],
+  "addons": [
+    "heroku-postgresql"
+  ]
 }
